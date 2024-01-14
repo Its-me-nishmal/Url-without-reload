@@ -12,18 +12,33 @@
   <script>
     // JavaScript code for updating the URL without reloading
 
-    function updateURL() {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
+    const sentences = [
+      "This website created by Nishmal Vadakara.",
+      "He is a Node.js developer.",
+      "Don't try to hack this.",
+      // Add more sentences as needed
+    ];
 
-      const timestamp = `${hours}:${minutes}:${seconds}`;
-      window.location.hash = `#${timestamp}`;
+    let sentenceIndex = 0;
+    let letterIndex = 0;
+
+    function updateURL() {
+      const sentence = sentences[sentenceIndex];
+      const currentText = sentence.substring(0, letterIndex + 1);
+      const newURL = window.location.origin + currentText;
+      history.pushState({ path: newURL }, '', newURL);
+
+      letterIndex++;
+
+      if (letterIndex > sentence.length) {
+        // Move to the next sentence
+        letterIndex = 0;
+        sentenceIndex = (sentenceIndex + 1) % sentences.length;
+      }
     }
 
-    // Example: Update the URL every second
-    setInterval(updateURL, 1000);
+    // Example: Update the URL every 200 milliseconds
+    setInterval(updateURL, 200);
   </script>
 
 </body>
