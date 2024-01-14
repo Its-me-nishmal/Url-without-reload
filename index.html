@@ -14,6 +14,31 @@
       "This-website-created-by-Nishmal-Vadakara.",
       "He-is-a-Node.js-developer.",
       "Don't-try-to-hack-this.",
+      "Adding-more-sentences.",
+      "Each-sentence-can-be-customized-as-needed.",
+      "Feel-free-to-make-adjustments-for-your-use-case.",
+      "Testing-the-typing-animation-with-dashes-in-the-URL.",
+      "This-is-an-example-for-educational-purposes.",
+      "Adjust-the-code-to-fit-your-specific-requirements.",
+      "Experiment-with-the-typing-speed-and-pause-duration.",
+      "Customize-the-content-and-make-it-unique.",
+      "Continuously-update-the-URL-without-adding-to-history.",
+      "Consider-optimizing-for-usability-and-user-experience.",
+      "Explore-different-ways-to-engage-users-on-your-website.",
+      "Use-creative-and-interactive-elements-to-capture-attention.",
+      "Stay-curious-and-keep-learning-about-web-development.",
+      "Create-web-applications-that-enhance-the-user-experience.",
+      "Stay-up-to-date-with-the-latest-technologies-and-trends.",
+      "Collaborate-with-other-developers-to-share-knowledge.",
+      "Apply-best-practices-in-coding-and-web-development.",
+      "Optimize-your-code-for-performance-and-scalability.",
+      "Secure-your-web-applications-against-common-vulnerabilities.",
+      "Implement-responsive-design-to-support-various-devices.",
+      "Experiment-with-different-styles-and-design-patterns.",
+      "Incorporate-user-feedback-to-improve-your-projects.",
+      "Explore-the-diverse-ecosystem-of-web-development-tools.",
+      "Contribute-to-open-source-projects-and-the-developer-community.",
+      "Keep-exploring-and-enjoy-the-journey-of-web-development.",
       // Add more sentences as needed
     ];
 
@@ -35,21 +60,23 @@
           letterIndex = 0;
           sentenceIndex = (sentenceIndex + 1) % sentences.length;
           pauseTimer = false;
-        }, 1000);
+        }, 800);
       }
-    }
 
-    function updateURL() {
-      const sentence = sentences[sentenceIndex];
-      const currentText = sentence.substring(0, letterIndex + 1);
-      const newURL = window.location.origin + '/' + encodeURIComponent(currentText);
-      history.pushState({ path: newURL }, '', newURL);
+      if (sentenceIndex === 0 && letterIndex === 0) {
+        // If it's the beginning of the cycle, reset the URL to the base
+        const newURL = window.location.origin;
+        history.replaceState({ path: newURL }, '', newURL);
+      } else {
+        // Update the URL during the cycle
+        const newURL = window.location.origin + '/' + encodeURIComponent(currentText);
+        history.replaceState({ path: newURL }, '', newURL);
+      }
     }
 
     setInterval(() => {
       updateContent();
-      updateURL();
-    }, 200);
+    }, 100);
   </script>
 
 </body>
