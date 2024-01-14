@@ -28,7 +28,7 @@
       letterIndex++;
 
       if (letterIndex > sentence.length) {
-        // Completed the sentence, wait for 1 second
+        // Completed the sentence, wait for 1 second before moving to the next sentence
         setTimeout(() => {
           letterIndex = 0;
           sentenceIndex = (sentenceIndex + 1) % sentences.length;
