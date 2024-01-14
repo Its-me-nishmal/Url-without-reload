@@ -11,9 +11,9 @@
 
   <script>
     const sentences = [
-      "This website created by Nishmal Vadakara.",
-      "He is a Node.js developer.",
-      "Don't try to hack this.",
+      "This-website-created-by-Nishmal-Vadakara.",
+      "He-is-a-Node.js-developer.",
+      "Don't-try-to-hack-this.",
       // Add more sentences as needed
     ];
 
@@ -28,16 +28,18 @@
       letterIndex++;
 
       if (letterIndex > sentence.length) {
-        letterIndex = 0;
-        sentenceIndex = (sentenceIndex + 1) % sentences.length;
+        // Completed the sentence, wait for 1 second
+        setTimeout(() => {
+          letterIndex = 0;
+          sentenceIndex = (sentenceIndex + 1) % sentences.length;
+        }, 1000);
       }
     }
 
     function updateURL() {
       const sentence = sentences[sentenceIndex];
       const currentText = sentence.substring(0, letterIndex + 1);
-      const sanitizedText = currentText.replace(/\s/g, '-'); // Replace spaces with dashes
-      const newURL = window.location.origin + '/' + encodeURIComponent(sanitizedText);
+      const newURL = window.location.origin + '/' + encodeURIComponent(currentText);
       history.pushState({ path: newURL }, '', newURL);
     }
 
