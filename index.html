@@ -12,14 +12,14 @@
   <script>
     // JavaScript code for updating the URL without reloading
 
-    let isOldPath = true;
-
     function updateURL() {
-      const newPath = isOldPath ? '/new-path' : '/old-path';
-      const newURL = window.location.origin + newPath;
-      window.history.pushState({ path: newURL }, '', newURL);
-      
-      isOldPath = !isOldPath; // Toggle between old and new path
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+
+      const timestamp = `${hours}:${minutes}:${seconds}`;
+      window.location.hash = `#${timestamp}`;
     }
 
     // Example: Update the URL every second
