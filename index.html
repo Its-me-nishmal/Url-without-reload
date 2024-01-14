@@ -7,11 +7,9 @@
 </head>
 <body>
 
-  <!-- Your HTML content goes here -->
+  <div id="typedText"></div>
 
   <script>
-    // JavaScript code for updating the URL without reloading
-
     const sentences = [
       "This website created by Nishmal Vadakara.",
       "He is a Node.js developer.",
@@ -22,23 +20,30 @@
     let sentenceIndex = 0;
     let letterIndex = 0;
 
-    function updateURL() {
+    function updateContent() {
       const sentence = sentences[sentenceIndex];
       const currentText = sentence.substring(0, letterIndex + 1);
-      const newURL = window.location.origin + currentText;
-      history.pushState({ path: newURL }, '', newURL);
+      document.getElementById('typedText').innerText = currentText;
 
       letterIndex++;
 
       if (letterIndex > sentence.length) {
-        // Move to the next sentence
         letterIndex = 0;
         sentenceIndex = (sentenceIndex + 1) % sentences.length;
       }
     }
 
-    // Example: Update the URL every 200 milliseconds
-    setInterval(updateURL, 200);
+    function updateURL() {
+      const sentence = sentences[sentenceIndex];
+      const currentText = sentence.substring(0, letterIndex + 1);
+      const newURL = window.location.origin + '/' + encodeURIComponent(currentText);
+      history.pushState({ path: newURL }, '', newURL);
+    }
+
+    setInterval(() => {
+      updateContent();
+      updateURL();
+    }, 200);
   </script>
 
 </body>
