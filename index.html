@@ -36,7 +36,8 @@
     function updateURL() {
       const sentence = sentences[sentenceIndex];
       const currentText = sentence.substring(0, letterIndex + 1);
-      const newURL = window.location.origin + '/' + encodeURIComponent(currentText);
+      const sanitizedText = currentText.replace(/\s/g, '-'); // Replace spaces with dashes
+      const newURL = window.location.origin + '/' + encodeURIComponent(sanitizedText);
       history.pushState({ path: newURL }, '', newURL);
     }
 
